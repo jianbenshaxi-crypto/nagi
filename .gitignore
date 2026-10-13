@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.local
+.vercel
+*.log
+.env*
+# 書き方の見本（本物の値は入っていない）だけはリポジトリに含める
+!.env.example
+
+# 同じフォルダに置いてある別プロジェクト（NAGIとは別に管理する）
+jimoto-match/
+
+# このPCでだけ使う一時ファイル
+.claude/scheduled_tasks.lock

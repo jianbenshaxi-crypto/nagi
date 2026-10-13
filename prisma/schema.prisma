@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+// ログインなしで使うため、ブラウザに保存した clientToken だけで
+// 「途中から再開」を実現する。ユーザーを一意に特定する個人情報ではない。
+model CareSession {
+  id             String        @id @default(uuid())
+  clientToken    String
+  status         SessionStatus @default(IN_PROGRESS)
+
+  moodInput      String? // 入力された気分の原文
+  moodSummary    String? // 長文だった場合の要約（イレギュラーケース2）
+  moodFlag       String? // "gibberish" | "inappropriate" | "crisis" | null
+  moodScore      Int? // ホーム画面の5段階タップ（1=大荒れ 〜 5=凪）。心の波の可視化に使う
+
+  careType       String? // "breathing" | "nature_sound" | "words"
+  accomplishment String? // 「今日できたこと」ひとつ
+
+  contextTags        String[] @default([]) // 睡眠不足/運動した/勉強/仕事/人間関係/休養（NAGI MEMORY同意時のみ収集）
+  postCareMoodScore  Int? // ケア体験後の気分（1〜5）。「今日の小さな一歩」のフォローで使う
+  highlight          String? // 夜の振り返り「今日、一番印象に残ったこと」の短文
+
+  stressLevel        Int? // ホームの軽量入力（1=低 〜 3=高）。任意・提案の重み付けに使う
+  energyLevel        Int? // ホームの軽量入力（1=低 〜 3=高）。任意・提案の重み付けに使う
+  sleepLevel         Int? // ホームの軽量入力（1=不足 〜 3=十分）。任意・提案の重み付けに使う
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([clientToken, status])
+}
+
+// ジャーナリング（質問形式の短い日記）。CareSessionとは別に、1日に何度でも書ける。
+model JournalEntry {
+  id          String   @id @default(uuid())
+  clientToken String
+  prompt      String // "tiring" | "accomplished" | "worried" | "toTomorrowSelf" | "toNextWeekSelf" | "toNextMonthSelf"
+  content     String
+  summary     String? // 長文だった場合の要約
+  flag        String? // "gibberish" | "inappropriate" | "crisis" | null
+  emotionTags String[] @default([]) // 不安/悲しい/怒り/疲れ/安心/嬉しい 等、投稿時に任意で選ぶ感情タグ
+  createdAt   DateTime @default(now())
+
+  @@index([clientToken, createdAt])
+}
+
+// NAGI MEMORY NOTES：ユーザー自身が「自分について知っておいてほしいこと」を書く短いメモ
+// （例：「雨の音が好き」「夜に使いたい」）。自動収集された傾向とは別物で、ユーザーが
+// 自分で追加・削除する。診断や分析には使わない。
+model MemoryNote {
+  id          String   @id @default(uuid())
+  clientToken String
+  content     String
+  createdAt   DateTime @default(now())
+
+  @@index([clientToken, createdAt])
+}

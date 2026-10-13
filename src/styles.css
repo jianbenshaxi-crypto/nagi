@@ -1,0 +1,1349 @@
+/* 旧版NAGI（mental-care-app）の配色を引き継いだテーマ。
+   --accent はボタン等の面に使う濃い色、--accent-light は装飾（ロゴ・背景の光）用。 */
+:root {
+  --bg-top: #f3f7f7;
+  --bg-bottom: #e8f0f0;
+  --surface: rgba(255, 255, 255, 0.94);
+  --field-bg: #f3f7f7;
+  --card-border: #6f9999;
+  --ink: #20302f;
+  --ink-soft: #5c7271;
+  --accent: #2f7a7a;
+  --accent-hover: #256363;
+  --accent-light: #5fb3ae;
+  --accent-soft: #a9d9d4;
+  --accent-deep: #256363;
+  --accent-tint: #e6f3f2;
+  --lavender: #cfeae6;
+  --sage: #7fb6a8;
+  --sage-strong: #3f7f70;
+  --warm: #eec27e;
+  --warn-bg: #fff6e9;
+  --warn-border: #f0d9a8;
+  --warn-text: #7a5f22;
+  --danger-bg: #fdf1ee;
+  --danger-ink: #8a4a3a;
+  --radius: 24px;
+  --shadow: 0 10px 24px -18px rgba(47, 122, 122, 0.3);
+  --nav-height: 64px;
+}
+
+/* 🌙 ダークモード（旧版NAGIの配色） */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-top: #0f1a1c;
+  --bg-bottom: #132325;
+  --surface: rgba(24, 43, 45, 0.94);
+  --field-bg: #132325;
+  --card-border: #5c8285;
+  --ink: #e9f3f2;
+  --ink-soft: #9fb8b6;
+  --accent: #3fa39b;
+  --accent-hover: #348c85;
+  --accent-light: #5fc2bb;
+  --accent-soft: #3e6b6a;
+  --accent-deep: #8fd6cf;
+  --accent-tint: #1d3436;
+  --lavender: #254342;
+  --sage: #6fb0a0;
+  --sage-strong: #4a9384;
+  --warm: #e0b674;
+  --warn-bg: #3a3320;
+  --warn-border: #6b5a2a;
+  --warn-text: #f0d9a8;
+  --danger-bg: #3a2622;
+  --danger-ink: #f0b8a8;
+  --shadow: 0 10px 24px -18px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    Meiryo, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 76px 16px 24px;
+}
+
+/* 複数のカードを縦に並べる画面（ホームなど）の入れ物 */
+.screen-stack {
+  width: 100%;
+  max-width: 480px;
+}
+
+.app-shell.with-nav {
+  padding-bottom: calc(var(--nav-height) + 24px);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  text-align: center;
+  animation: fade-in 0.5s ease;
+}
+
+.tagline {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+  letter-spacing: 0.04em;
+}
+
+/* 「🌱 ○日目」バッジ（旧版NAGIから引き継ぎ） */
+.journey-badge {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  color: var(--warn-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand {
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+p.lead {
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin: 0 0 28px;
+  white-space: pre-line;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-deep);
+  border: 1.5px solid var(--accent-soft);
+}
+
+.btn-secondary.active {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  padding: 10px;
+}
+
+.btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  border: 1.5px solid var(--accent-soft);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 110px;
+  margin-bottom: 8px;
+  background: var(--field-bg);
+  color: var(--ink);
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: left;
+  margin: -2px 0 20px;
+}
+
+.error-box {
+  background: var(--danger-bg);
+  color: var(--danger-ink);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.care-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.care-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--accent-soft);
+  background: var(--field-bg);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.care-option:hover {
+  border-color: var(--accent);
+}
+
+.care-option.suggested {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.care-option .emoji {
+  font-size: 26px;
+}
+
+.care-option .title {
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.care-option .desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.sound-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 4px 0 20px;
+}
+
+.sound-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border-radius: 14px;
+  border: 1.5px solid var(--accent-soft);
+  background: var(--field-bg);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--ink);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.sound-chip:hover {
+  border-color: var(--accent);
+}
+
+.sound-chip .emoji {
+  font-size: 20px;
+}
+
+.sound-chip.active {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+.sound-chip.suggested {
+  border-color: var(--accent-soft);
+  border-style: dashed;
+}
+
+.sound-volumes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.sound-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sound-volume-row .emoji {
+  font-size: 16px;
+  width: 22px;
+  text-align: center;
+}
+
+.sound-volume-row input[type='range'] {
+  flex: 1;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.breathing-circle {
+  width: 180px;
+  height: 180px;
+  margin: 20px auto 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--accent-soft), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  transition: transform 3.6s ease-in-out;
+}
+
+.breathing-circle.inhale {
+  transform: scale(1.25);
+}
+
+.breathing-circle.hold {
+  transform: scale(1.25);
+}
+
+.breathing-circle.exhale {
+  transform: scale(0.85);
+}
+
+.sound-visual {
+  width: 180px;
+  height: 180px;
+  margin: 20px auto 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, var(--accent-tint) 0%, transparent 72%);
+  font-size: 40px;
+}
+
+.words-card {
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--accent-deep);
+  animation: fade-in 0.6s ease;
+}
+
+.exit-link {
+  margin-top: 24px;
+}
+
+.footer-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* 右上は ⚙️ / 🌙 ボタンになったため、言語切り替えは左上に置く */
+.locale-toggle {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  border: 1px solid var(--card-border);
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+.locale-toggle button {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.locale-toggle button.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* --- Mood scale (Home画面の5段階タップ) --- */
+
+.mood-scale {
+  display: flex;
+  gap: 6px;
+  margin: 4px 0 20px;
+}
+
+/* 旧版NAGIの絵文字ボタン（角丸の枠つき）に合わせた見た目 */
+.mood-scale-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 2px;
+  border: 2px solid var(--accent-soft);
+  background: var(--field-bg);
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 14px;
+  transition: border-color 0.2s ease, background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.mood-scale-item:hover {
+  transform: translateY(-2px);
+}
+
+.mood-scale-item.active {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+}
+
+.mood-scale-emoji {
+  font-size: 30px;
+  line-height: 1;
+  display: inline-block;
+  /* 絵文字本来の色のまま、見やすさを優先する（フィルターで薄めない） */
+  opacity: 0.55;
+  transform: scale(1);
+  transition: opacity 0.15s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mood-scale-item:hover .mood-scale-emoji {
+  transform: scale(1.1);
+}
+
+.mood-scale-item.active .mood-scale-emoji {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+.mood-scale-label {
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+/* --- 今日のコンディション --- */
+
+.today-condition {
+  text-align: left;
+  font-size: 13px;
+  color: var(--accent-deep);
+  background: var(--accent-tint);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 4px 0 12px;
+  line-height: 1.6;
+}
+
+/* --- 今日のあなたへ（提案カード） --- */
+
+.suggestion-card {
+  background: var(--accent-tint);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin: 4px 0 20px;
+  text-align: left;
+  animation: fade-in 0.4s ease;
+}
+
+.suggestion-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+}
+
+html[data-theme='dark'] .suggestion-title {
+  color: var(--accent-deep);
+}
+
+.suggestion-body {
+  color: var(--ink);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+/* --- コンテキストタグ・夜の振り返り（Home画面） --- */
+
+.tag-section {
+  text-align: left;
+  margin: 4px 0 20px;
+}
+
+.tag-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-chip {
+  border: 1.5px solid var(--accent-soft);
+  background: var(--field-bg);
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.tag-chip:hover {
+  border-color: var(--accent);
+}
+
+.tag-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+/* --- ジャーナリング --- */
+
+.journal-history {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.journal-entry-meta {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 0 0 4px;
+}
+
+.journal-entry-body {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.journal-entry-delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.journal-entry-delete-confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+/* --- 心の波（トレンド） --- */
+
+.range-tabs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.range-tab {
+  border: 1.5px solid var(--accent-soft);
+  background: var(--field-bg);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.range-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* 「1分だけ」を常に目立たせるための控えめな強調（選択済みの.activeより主張は弱くする） */
+.range-tab.featured {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+}
+
+.level-stats {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 4px;
+}
+
+.level-stat {
+  flex: 1;
+  text-align: center;
+  background: var(--accent-tint);
+  border-radius: 12px;
+  padding: 10px 4px;
+}
+
+.level-stat-label {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin: 0 0 2px;
+}
+
+.level-stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  margin: 0;
+}
+
+.mood-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.mood-calendar-nav-btn {
+  border: none;
+  background: transparent;
+  color: var(--accent-deep);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.mood-calendar-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mood-calendar-month {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.mood-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.mood-calendar-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.mood-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.mood-calendar-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: var(--accent-tint);
+  font-size: 16px;
+}
+
+.mood-calendar-cell.outside {
+  background: transparent;
+}
+
+.emotion-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emotion-timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.emotion-timeline-time {
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  min-width: 44px;
+}
+
+.trend-sparkline {
+  color: var(--accent);
+  stroke: currentColor;
+  background: var(--accent-tint);
+  border-radius: 16px;
+  padding: 8px 0;
+}
+
+/* --- NAGI MEMORY NOTES --- */
+
+.memory-note-list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memory-note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--field-bg);
+  border: 1.5px solid var(--accent-soft);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.memory-note-delete {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.memory-note-delete:hover {
+  color: var(--danger-ink);
+}
+
+/* --- 設定・プライバシー --- */
+
+.settings-section {
+  text-align: left;
+  padding: 18px 0;
+  border-top: 1px solid var(--accent-tint);
+}
+
+.settings-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.settings-section .title {
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.settings-section .lead {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* --- ボトムナビゲーション --- */
+
+/* 旧版NAGIのタブバー（🏡 🌿 🧭 💬） */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: var(--nav-height);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  display: flex;
+  justify-content: center;
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--card-border);
+  z-index: 60;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  max-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.bottom-nav-item.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+html[data-theme='dark'] .bottom-nav-item.active {
+  color: var(--accent-deep);
+}
+
+.bottom-nav-icon {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.bottom-nav-label {
+  font-size: 11px;
+}
+
+/* --- 右上の丸ボタン（⚙️ 設定 / 🌙 テーマ） --- */
+
+.top-actions {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+.round-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgba(47, 122, 122, 0.35);
+  transition: transform 0.15s ease;
+}
+
+.round-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* --- 背景のふんわりした光（旧版NAGI） --- */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 420px;
+  height: 420px;
+  background: var(--accent-light);
+  top: -140px;
+  left: -110px;
+  animation: drift-a 34s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  width: 360px;
+  height: 360px;
+  background: var(--lavender);
+  bottom: -150px;
+  right: -90px;
+  animation: drift-b 40s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: var(--sage);
+  top: 38%;
+  right: 6%;
+  animation: drift-c 30s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  to {
+    transform: translate(50px, 30px) scale(1.1);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translate(-40px, -25px) scale(1.08);
+  }
+}
+
+@keyframes drift-c {
+  to {
+    transform: translate(-30px, 40px) scale(0.94);
+  }
+}
+
+/* --- ヘッダー（波紋のロゴ・NAGI 凪） --- */
+
+.brand-header {
+  text-align: center;
+  padding: 8px 0 24px;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.brand-ripple circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.brand-ripple circle:nth-child(2) {
+  animation: ripple-pulse 5s ease-in-out infinite;
+}
+
+.brand-ripple circle:nth-child(3) {
+  animation: ripple-pulse 5s ease-in-out infinite 0.8s;
+}
+
+@keyframes ripple-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+.brand-title {
+  font-size: clamp(30px, 8vw, 40px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.brand-kanji {
+  font-size: 0.5em;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-left: 6px;
+}
+
+.brand-tagline {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.brand-tagline-en {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+}
+
+/* --- ホーム（今、どんな感じ？） --- */
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.home-hero {
+  background: linear-gradient(160deg, var(--surface) 0%, var(--accent-tint) 160%);
+}
+
+.home-today {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+.home-today-mood {
+  font-size: 34px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--field-bg);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.home-today-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-today-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.home-today-greeting {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* --- 相談チャット（旧版NAGIの「少し話してみる」） --- */
+
+.chat-card {
+  text-align: left;
+}
+
+.chat-subtitle {
+  font-size: 14px;
+  color: var(--accent);
+  margin: -8px 0 14px;
+}
+
+html[data-theme='dark'] .chat-subtitle,
+html[data-theme='dark'] .chat-mode-status {
+  color: var(--accent-deep);
+}
+
+.chat-intro {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chat-mode-status {
+  font-size: 12px;
+  color: var(--accent);
+  margin: -6px 0 12px;
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.chat-msg {
+  max-width: 82%;
+  padding: 10px 15px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.chat-msg p {
+  margin: 0;
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg.bot {
+  align-self: flex-start;
+  background: var(--field-bg);
+  border: 1px solid var(--card-border);
+  color: var(--ink);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-msg.crisis {
+  max-width: 92%;
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-text);
+}
+
+.chat-msg.crisis p {
+  margin-bottom: 10px;
+}
+
+.chat-msg.crisis ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chat-msg.crisis a {
+  color: var(--warn-text);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.chat-msg.care-suggestion {
+  max-width: 92%;
+  background: var(--accent-tint);
+  border-color: var(--accent-light);
+}
+
+.chat-care-suggestion-title {
+  font-weight: 700;
+  margin-bottom: 4px !important;
+  line-height: 1.6;
+}
+
+.chat-msg.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 14px 17px;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.chat-form {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-form .chat-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 11px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  font-size: 14.5px;
+}
+
+.chat-send {
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: none;
+  background: var(--sage-strong);
+  color: #fff;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 14.5px;
+  cursor: pointer;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+
+.chat-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-reset-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.chat-reset-row .btn {
+  width: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
