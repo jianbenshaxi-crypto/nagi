@@ -63,7 +63,7 @@ graph LR
   API -- "Prismaで読み書き（接続情報は環境変数 DATABASE_URL）" --> DB
   DB -- "保存した記録" --> API
   API -- "JSONで結果を返す" --> Front
-  Front -. "閲覧数（※未導入）" .-> Analytics
+  Front -- "ページの閲覧データ（Vercel Web Analytics）" --> Analytics
 ```
 
 - フロントエンド: Vite + React（`src/`）
@@ -71,6 +71,7 @@ graph LR
 - ORM: Prisma（`prisma/schema.prisma`）
 - DB: Neon Postgres（Vercel Marketplace 経由で接続）
 - AI: Gemini API（`api/chat.js`。AIチャットの返答に使用）
+- 計測: Vercel Web Analytics（`@vercel/analytics`。`src/main.jsx` で読み込み）
 - 共有ロジック: `shared/moderation.js`（入力バリデーション／モデレーションをフロントとAPIの両方で使用）
 - 仕様書: `docs/01_spec.md`
 
