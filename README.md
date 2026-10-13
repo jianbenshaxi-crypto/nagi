@@ -2,7 +2,7 @@
 
 呼吸・自然音・言葉によるセルフケアで、頑張りすぎた心を「今日はここまででいい」と休ませるアプリ。
 
-本番環境：https://health-care-lime-beta.vercel.app
+本番環境：[https://health-care-lime-beta.vercel.app](https://health-care-lime-beta.vercel.app)
 
 ## 1. 何を作ったか
 
@@ -48,7 +48,8 @@
 - フロントエンド: Vite + React（`src/`）
 - API: Vercel Functions（`api/`。ブラウザは直接DBに接続せず、必ずこの層を経由する）
 - ORM: Prisma（`prisma/schema.prisma`）
-- DB: Vercel Postgres（Neon）
+- DB: Neon Postgres（Vercel Marketplace 経由で接続）
+- AI: Gemini API（`api/chat.js`。AIチャットの返答に使用）
 - 共有ロジック: `shared/moderation.js`（入力バリデーション／モデレーションをフロントとAPIの両方で使用）
 - 仕様書: `docs/01_spec.md`
 
@@ -56,10 +57,21 @@
 
 ```bash
 npm install
-cp .env.example .env.local   # Vercel Dashboard の Storage タブから DATABASE_URL を取得して設定
+vercel link                  # Vercelプロジェクト（health-care）と紐づける
+vercel env pull .env.local   # DATABASE_URL などの環境変数を取得
 npx prisma db push           # スキーマをDBに反映
 npm run dev                  # フロントエンドのみ（http://localhost:5173）
 ```
+
+### 環境変数
+
+| 名前 | 用途 | 備考 |
+|---|---|---|
+| `DATABASE_URL` | DB接続 | Neon連携で自動設定される。`vercel env pull` で取得 |
+| `GEMINI_API_KEY` | AIチャット | 本番環境のみに設定済み。手元で試すときは [Google AI Studio](https://aistudio.google.com/apikey) で発行したキーを `.env.local` に追記する。未設定でもアプリは動き、AIチャットは「準備中」の案内を返す |
+| `GEMINI_MODEL` | 使用モデルの差し替え | 任意。未設定なら `gemini-3.5-flash-lite` |
+
+各値の書き方は `.env.example` を参照。
 
 API（`api/`）はVercel Functionsのため、フロントとAPIを合わせて動かすには [Vercel CLI](https://vercel.com/docs/cli) を使う。
 
