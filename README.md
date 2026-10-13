@@ -45,27 +45,6 @@
 
 ## 構成
 
-```mermaid
-graph LR
-  User["ユーザーのブラウザ<br>（スマホ）"]
-
-  subgraph Vercel["Vercel"]
-    Front["画面<br>（Vite + React）"]
-    API["api/<br>（Vercel Functions）"]
-  end
-
-  DB[("Postgres<br>（Neon）")]
-  Analytics["Analytics"]
-
-  User -- "URLを開く（DNSでVercelの場所を調べる）" --> Front
-  Front -- "HTML・JS・CSS" --> User
-  Front -- "fetch /api/…（気分・ジャーナル・匿名ID）" --> API
-  API -- "Prismaで読み書き（接続情報は環境変数 DATABASE_URL）" --> DB
-  DB -- "保存した記録" --> API
-  API -- "JSONで結果を返す" --> Front
-  Front -- "ページの閲覧データ（Vercel Web Analytics）" --> Analytics
-```
-
 - フロントエンド: Vite + React（`src/`）
 - API: Vercel Functions（`api/`。ブラウザは直接DBに接続せず、必ずこの層を経由する）
 - ORM: Prisma（`prisma/schema.prisma`）
@@ -100,4 +79,27 @@ API（`api/`）はVercel Functionsのため、フロントとAPIを合わせて�
 ```bash
 npm i -g vercel
 vercel dev
+```
+
+## インフラ構成図
+
+```mermaid
+graph LR
+  User["ユーザーのブラウザ<br>（スマホ）"]
+
+  subgraph Vercel["Vercel"]
+    Front["画面<br>（Vite + React）"]
+    API["api/<br>（Vercel Functions）"]
+  end
+
+  DB[("Postgres<br>（Neon）")]
+  Analytics["Analytics"]
+
+  User -- "URLを開く（DNSでVercelの場所を調べる）" --> Front
+  Front -- "HTML・JS・CSS" --> User
+  Front -- "fetch /api/…（気分・ジャーナル・匿名ID）" --> API
+  API -- "Prismaで読み書き（接続情報は環境変数 DATABASE_URL）" --> DB
+  DB -- "保存した記録" --> API
+  API -- "JSONで結果を返す" --> Front
+  Front -- "ページの閲覧データ（Vercel Web Analytics）" --> Analytics
 ```
